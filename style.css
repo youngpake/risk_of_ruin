@@ -1,0 +1,233 @@
+/* Base styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px;
+    height: 95vh;
+    margin: 2.5vh auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Typography */
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0; /* Remove top margin */
+}
+
+/* Calculator container */
+.calculator-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    overflow-y: auto; /* Add scroll if content exceeds height */
+}
+
+@media (min-width: 768px) {
+    .calculator-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* Form */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    form {
+        width: 30%;
+    }
+}
+
+label {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+input {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    margin-top: 1.5rem;
+    padding: 0.7rem;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Results */
+#result {
+    width: 100%;
+    overflow-y: auto; /* Add scroll if content exceeds height */
+}
+
+@media (min-width: 768px) {
+    #result {
+        width: 65%;
+    }
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Chart container */
+.chart-container {
+    width: 100%;
+    height: 300px; /* Reduce height */
+    max-height: 50vh; /* Limit maximum height */
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Loading bar */
+.loading-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #f0f0f0;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.loading-bar-progress {
+    width: 0;
+    height: 100%;
+    background-color: #3498db;
+    transition: width 0.5s ease;
+}
+
+/* Utility classes */
+.hidden {
+    display: none;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem 0; /* Reduce padding */
+    margin-top: 1rem; /* Reduce margin */
+    border-top: 1px solid #ddd;
+    font-size: 0.9em;
+    color: #666;
+}
+
+footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* disclaimer styling */
+.info-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.info-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #007bff; /* Bootstrap primary color */
+    transition: color 0.3s ease;
+}
+
+.info-button:hover {
+    color: #0056b3; /* Darker shade for hover effect */
+}
+
+.info-button:focus {
+    outline: none;
+}
+
+.bi-exclamation-triangle {
+    color: #ffc107; /* Bootstrap warning color */
+}
+
+.bi-exclamation-triangle:hover {
+    color: #d39e00; /* Darker shade for hover effect */
+}
+
+dialog {
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 600px;
+    border-radius: 5px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.close-dialog {
+    margin-top: 15px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
