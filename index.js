@@ -1,5 +1,5 @@
 let equityCurveChart;
-// NEED TO ADD GOOGLE TAG MANAGER CODE HERE
+
 const infoDialog = document.getElementById("infoDialog");
 const disclaimerDialog = document.getElementById("disclaimerDialog");
 const infoBtn = document.getElementById("infoButton");
@@ -111,12 +111,9 @@ function calculateRiskOfRuin(initialBalance, riskPerTrade, rewardPerTrade, winRa
         totalFinalBalance += balance;
     }
 
-    const singlePeriodSurvivalRate = 1 - (ruinCount / simulations);
-    const cumulativeRuinRate = 1 - Math.pow(singlePeriodSurvivalRate, 10);
 
     return {
         strictRiskOfRuin: (ruinCount / simulations) * 100,
-        cumulativeRiskOfRuin: cumulativeRuinRate * 100,
         riskOf30PercentDrawdown: (drawdown30Count / simulations) * 100,
         riskOf50PercentDrawdown: (drawdown50Count / simulations) * 100,
         minBalanceReached: minBalance,
@@ -130,7 +127,6 @@ function updateResultTable(results) {
 
     const rows = [
         ['Strict Risk of Ruin', results.strictRiskOfRuin.toFixed(4) + '%'],
-        ['Cumulative Risk of Ruin (10x period)', results.cumulativeRiskOfRuin.toFixed(4) + '%'],
         ['Risk of 30% Drawdown', results.riskOf30PercentDrawdown.toFixed(2) + '%'],
         ['Risk of 50% Drawdown', results.riskOf50PercentDrawdown.toFixed(2) + '%'],
         ['Minimum Balance Reached', '$' + results.minBalanceReached.toFixed(2)],
@@ -163,12 +159,11 @@ function updateChart(results) {
     riskChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Strict RoR', 'Cumulative RoR', '30% Drawdown', '50% Drawdown'],
+            labels: ['Strict RoR', '30% Drawdown', '50% Drawdown'],
             datasets: [{
                 label: 'Risk Percentages',
                 data: [
                     results.strictRiskOfRuin,
-                    results.cumulativeRiskOfRuin,
                     results.riskOf30PercentDrawdown,
                     results.riskOf50PercentDrawdown
                 ],
