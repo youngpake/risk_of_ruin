@@ -139,9 +139,14 @@ function updateResultTable(results) {
 
     rows.forEach(row => {
         const tr = document.createElement('tr');
-        row.forEach(cell => {
+        row.forEach((cell, index) => {
             const td = document.createElement('td');
             td.textContent = cell;
+            if (index === 0) {
+                td.setAttribute('data-label', 'Metric');
+            } else {
+                td.setAttribute('data-label', 'Value');
+            }
             tr.appendChild(td);
         });
         tableBody.appendChild(tr);
