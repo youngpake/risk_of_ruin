@@ -1,5 +1,5 @@
 let equityCurveChart;
-
+// NEED TO ADD GOOGLE TAG MANAGER CODE HERE
 const infoDialog = document.getElementById("infoDialog");
 const disclaimerDialog = document.getElementById("disclaimerDialog");
 const infoBtn = document.getElementById("infoButton");
