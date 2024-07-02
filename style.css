@@ -1,358 +1,419 @@
-/* Base styles */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-}
+:root {
+    /* Light theme (default) */
+    --background-color: #f0f4f8;
+    --container-color: #ffffff;
+    --primary-color: #2c7a7b;
+    --secondary-color: #ed8936;
+    --text-color: #2d3748;
+    --light-text-color: #4a5568;
+    --border-color: #e2e8f0;
+    --input-background: #ffffff;
+    --table-header-color: var(--primary-color);
+    --table-header-text: white;
+  }
+  
+  /* Dark theme */
+  [data-theme="dark"] {
+    --background-color: #1a202c;
+    --container-color: #2d3748;
+    --primary-color: #4fd1c5;
+    --secondary-color: #f6ad55;
+    --text-color: #e2e8f0;
+    --light-text-color: #a0aec0;
+    --border-color: #4a5568;
+    --input-background: #4a5568;
+    --table-header-color: #2c7a7b;
+    --table-header-text: #e2e8f0;
+  }
+  
+  /* Base styles */
+  html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .container {
+      width: 95%;
+      max-width: 1400px;
+      height: auto;
+      min-height: 95vh;
+      margin: 2.5vh auto;
+      padding: 2rem;
+      background-color: var(--container-color);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      transition: background-color 0.3s ease;
+  }
+  
+  /* Typography */
+  h1, h2 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-top: 0;
+  }
+  
+  /* Calculator container */
+  .calculator-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 2rem;
+      overflow-y: auto;
+  }
+  
+  /* Form */
+  form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  label {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: var(--text-color);
+  }
+  
+  input {
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: var(--input-background);
+      color: var(--text-color);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(44, 122, 123, 0.2);
+      outline: none;
+  }
+  
+  button {
+      margin-top: 1.5rem;
+      padding: 0.7rem;
+      background-color: var(--primary-color);
+      color: var(--container-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  button:hover {
+      background-color: var(--secondary-color);
+  }
+  
+  /* Results */
+  #result {
+      width: 100%;
+      overflow-y: auto;
+  }
+  
+  .results-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+  }
+  
+  /* Chart container */
+  .chart-container {
+      width: 100%;
+      height: 300px;
+      max-height: 50vh;
+  }
+  
+  /* Table */
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+  }
+  
+  th, td {
+      border: 1px solid var(--border-color);
+      padding: 0.5rem;
+      text-align: left;
+  }
+  
+  th {
+      background-color: var(--table-header-color);
+      color: var(--table-header-text);
+      font-weight: bold;
+  }
+  
+  /* Loading bar */
+  .loading-bar {
+      width: 100%;
+      height: 4px;
+      background-color: var(--border-color);
+      margin-top: 1rem;
+      overflow: hidden;
+  }
+  
+  .loading-bar-progress {
+      width: 0;
+      height: 100%;
+      background-color: var(--primary-color);
+      transition: width 0.5s ease;
+  }
+  
+  /* Utility classes */
+  .hidden {
+      display: none;
+  }
+  
+  .fade-in {
+      animation: fadeIn 1s ease-in;
+  }
+  
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+  
+  /* Footer */
+  footer {
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9em;
+      color: var(--light-text-color);
+  }
+  
+  footer a {
+      color: var(--primary-color);
+      text-decoration: underline;
+  }
+  
+  footer a:hover {
+      color: var(--secondary-color);
+  }
+  
+  /* Info buttons */
 
-.container {
-    width: 95%;
-    max-width: 1400px;
-    height: auto;
-    min-height: 95vh;
-    margin: 2.5vh auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-/* Typography */
-h1, h2 {
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 0;
-}
-
-/* Calculator container */
-.calculator-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 2rem;
-    overflow-y: auto;
-}
-
-/* Form */
-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-top: 1rem;
-    font-weight: bold;
-}
-
-input {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-button {
-    margin-top: 1.5rem;
-    padding: 0.7rem;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-/* Results */
-#result {
-    width: 100%;
-    overflow-y: auto;
-}
-
-.results-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-/* Chart container */
-.chart-container {
-    width: 100%;
-    height: 300px;
-    max-height: 50vh;
-}
-
-/* Table */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 0.5rem;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-/* Loading bar */
-.loading-bar {
-    width: 100%;
-    height: 4px;
-    background-color: #f0f0f0;
-    margin-top: 1rem;
-    overflow: hidden;
-}
-
-.loading-bar-progress {
-    width: 0;
-    height: 100%;
-    background-color: #3498db;
-    transition: width 0.5s ease;
-}
-
-/* Utility classes */
-.hidden {
-    display: none;
-}
-
-.fade-in {
-    animation: fadeIn 1s ease-in;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 1rem;
-    border-top: 1px solid #ddd;
-    font-size: 0.9em;
-    color: #666;
-}
-
-footer a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Info buttons */
 .info-buttons {
-    position: relative;
-    top: 10px;
-    right: 10px;
-}
-
-.info-button {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    margin-left: 10px;
-    color: #007bff;
-    transition: color 0.3s ease;
-}
-
-.info-button:hover {
-    color: #0056b3;
-}
-
-.info-button:focus {
-    outline: none;
-}
-
-.bi-exclamation-triangle {
-    color: #ffc107;
-}
-
-.bi-exclamation-triangle:hover {
-    color: #d39e00;
-}
-
-/* Dialog */
-dialog {
-    padding: 20px;
-    border: 1px solid #888;
-    max-width: 600px;
-    border-radius: 5px;
-}
-
-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.close-dialog {
-    margin-top: 15px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-/* Responsive styles */
-@media (min-width: 768px) {
-    .calculator-container {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    form {
-        width: 30%;
-    }
-
-    #result {
-        width: 65%;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
-        margin: 0;
-        padding: 1rem;
-        border-radius: 0;
-    }
-
-    .calculator-container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
         flex-direction: column;
-    }
-
-    form, #result {
-        width: 100%;
-    }
-
-    input, button {
-        padding: 0.8rem;
-        font-size: 16px;
-    }
-
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-
-    thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    tr {
-        margin-bottom: 0.5rem;
-    }
-
-    td {
-        border: none;
-        position: relative;
-        padding-left: 50%;
-    }
-
-    td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-    }
-
-    .chart-container {
-        height: 250px;
-    }
+        align-items: flex-start;
+}
+  
+  .info-button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
+      color: var(--secondary-color);
+      transition: color 0.3s ease;
+  }
+  
+  .info-button:hover {
+      color: var(--primary-color);
+  }
+  
+  .info-button:focus {
+      outline: none;
+  }
+  
+  .bi-exclamation-triangle {
+      color: var(--secondary-color);
+  }
+  
+  .bi-exclamation-triangle:hover {
+      color: var(--primary-color);
+  }
+  
+  /* Dialog */
+  dialog {
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      max-width: 600px;
+      border-radius: 5px;
+      background-color: var(--container-color);
+      color: var(--text-color);
+  }
+  
+  dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .close-dialog {
+      margin-top: 15px;
+      padding: 5px 10px;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--container-color);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .close-dialog:hover {
+      background-color: var(--secondary-color);
+  }
+  
+  /* Theme toggle button */
+  .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: var(--container-color);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .theme-toggle:hover {
+      background-color: var(--secondary-color);
+  }
+  
+  /* Responsive styles */
+  @media (min-width: 768px) {
+      .calculator-container {
+          flex-direction: row;
+          justify-content: space-between;
+      }
+  
+      form {
+          width: 30%;
+      }
+  
+      #result {
+          width: 65%;
+      }
+  }
+  
+  @media (max-width: 768px) {
+      .container {
+          width: 100%;
+          margin: 0;
+          padding: 1rem;
+          border-radius: 0;
+      }
 
     .info-buttons {
-        position: static;
-        text-align: center;
-        margin-bottom: 1rem;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: space-around;
     }
-
-    .info-button {
-        font-size: 20px;
-    }
-
-    dialog {
-        width: 90%;
-        max-width: none;
-    }
-}
-
-@media (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-
-    thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    tr {
-        margin-bottom: 1rem;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    td {
-        border: none;
-        position: relative;
-        padding-left: 50%;
-        text-align: right;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    td:last-child {
-        border-bottom: none;
-    }
-
-    td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 1rem;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-        text-align: left;
-        color: #2c3e50;
-    }
-
-    /* Add lines between each set of metric and value */
-    tr:after {
-        content: "";
-        display: block;
-        margin: 0 1rem;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    tr:last-child:after {
-        display: none;
-    }
-}
+  
+      .calculator-container {
+          flex-direction: column;
+      }
+  
+      form, #result {
+          width: 100%;
+      }
+  
+      input, button {
+          padding: 0.8rem;
+          font-size: 16px;
+      }
+  
+      table, thead, tbody, th, td, tr {
+          display: block;
+      }
+  
+      thead tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+      }
+  
+      tr {
+          margin-bottom: 1rem;
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          overflow: hidden;
+      }
+  
+      td {
+          border: none;
+          position: relative;
+          padding-left: 50%;
+          text-align: right;
+          border-bottom: 1px solid var(--border-color);
+      }
+  
+      td:last-child {
+          border-bottom: none;
+      }
+  
+      td:before {
+          content: attr(data-label);
+          position: absolute;
+          left: 1rem;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap;
+          font-weight: bold;
+          text-align: left;
+          color: var(--primary-color);
+      }
+  
+      .chart-container {
+          height: 250px;
+      }
+  
+      .info-buttons {
+          position: static;
+          text-align: center;
+          margin-bottom: 1rem;
+      }
+  
+      .info-button {
+          font-size: 20px;
+      }
+  
+      dialog {
+          width: 90%;
+          max-width: none;
+      }
+  
+      /* Add lines between each set of metric and value */
+      tr:after {
+          content: "";
+          display: block;
+          margin: 0 1rem;
+          border-bottom: 1px solid var(--border-color);
+      }
+  
+      tr:last-child:after {
+          display: none;
+      }
+  
+      .theme-toggle {
+          top: 10px;
+          right: 10px;
+      }
+  }

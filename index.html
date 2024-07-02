@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-59WWVTRQ');</script>
-        <!-- End Google Tag Manager -->
+        })(window,document,'script','dataLayer','GTM-59WWVTRQ');
+    </script>
+    <!-- End Google Tag Manager -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,18 +44,21 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <div class="info-buttons">
+        <button id="infoButton" class="info-button" title="What is Risk of Ruin?">
+            <i class="bi bi-info-circle"></i>
+        </button>
+        <button id="disclaimerButton" class="info-button" title="Disclaimer">
+            <i class="bi bi-exclamation-triangle"></i>
+        </button>
+        <button id="themeToggle" class="info-button" title="Toggle Dark/Light Mode">
+            <i class="bi bi-moon-fill"></i>
+        </button>
+    </div>
+
 
     <div class="container">
         <h1>Risk of Ruin Simulator</h1>
-
-        <div class="info-buttons">
-            <button id="infoButton" class="info-button" title="What is Risk of Ruin?">
-                <i class="bi bi-info-circle"></i>
-            </button>
-            <button id="disclaimerButton" class="info-button" title="Disclaimer">
-                <i class="bi bi-exclamation-triangle"></i>
-            </button>
-        </div>
         
         <dialog id="infoDialog">
             <h2>What is Risk of Ruin?</h2>

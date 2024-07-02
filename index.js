@@ -34,6 +34,26 @@ closeButtons.forEach(button => {
         }
     });
 });
+
+const themeToggle = document.getElementById('themeToggle');
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+function toggleTheme() {
+    if (document.body.getAttribute("data-theme") === "dark") {
+        document.body.setAttribute("data-theme", "light");
+    } else {
+        document.body.setAttribute("data-theme", "dark");
+    }
+}
+
+themeToggle.addEventListener("click", toggleTheme);
+
+// Set initial theme based on user's preference
+if (prefersDarkScheme.matches) {
+    document.body.setAttribute("data-theme", "dark");
+} else {
+    document.body.setAttribute("data-theme", "light");
+}
     
 
 document.getElementById('rorForm').addEventListener('submit', async function(e) {
@@ -149,68 +169,6 @@ function updateResultTable(results) {
     });
 }
 
-function updateChart(results) {
-    const ctx = document.getElementById('riskChart').getContext('2d');
-    
-    if (riskChart) {
-        riskChart.destroy();
-    }
-
-    riskChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Strict RoR', '30% Drawdown', '50% Drawdown'],
-            datasets: [{
-                label: 'Risk Percentages',
-                data: [
-                    results.strictRiskOfRuin,
-                    results.riskOf30PercentDrawdown,
-                    results.riskOf50PercentDrawdown
-                ],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 206, 86, 0.8)',
-                    'rgba(75, 192, 192, 0.8)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Percentage'
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Risk Analysis'
-                },
-                legend: {
-                    display: false
-                }
-            },
-            animation: {
-                duration: 1500,
-                easing: 'easeInOutQuart'
-            }
-        }
-    });
-}
-
 function simulateMultipleEquityCurves(initialBalance, riskPerTrade, rewardPerTrade, winRate, numberOfTrades, simulations = 3) {
     let equityCurves = [];
     
@@ -250,11 +208,14 @@ function updateEquityCurveChart(equityCurves) {
         label: `Simulation ${index + 1}`,
         data: curve,
         borderColor: colors[index],
-        backgroundColor: 'transparent', // Remove background color
-        borderWidth: 1, // Set a thin line width
+        backgroundColor: 'transparent',
+        borderWidth: 1,
         tension: 0.1,
-        pointRadius: 0 // Remove points on the line for a cleaner look
+        pointRadius: 0
     }));
+
+    const isDarkMode = document.body.getAttribute("data-theme") === "dark";
+    const textColor = isDarkMode ? '#e2e8f0' : '#2d3748';
 
     equityCurveChart = new Chart(ctx, {
         type: 'line',
@@ -269,13 +230,27 @@ function updateEquityCurveChart(equityCurves) {
                 x: {
                     title: {
                         display: true,
-                        text: 'Number of Trades'
+                        text: 'Number of Trades',
+                        color: textColor
+                    },
+                    ticks: {
+                        color: textColor
+                    },
+                    grid: {
+                        color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Account Balance'
+                        text: 'Account Balance',
+                        color: textColor
+                    },
+                    ticks: {
+                        color: textColor
+                    },
+                    grid: {
+                        color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
                     },
                     beginAtZero: true
                 }
@@ -283,10 +258,14 @@ function updateEquityCurveChart(equityCurves) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Equity Curve Simulations'
+                    text: 'Equity Curve Simulations',
+                    color: textColor
                 },
                 legend: {
-                    display: true
+                    display: true,
+                    labels: {
+                        color: textColor
+                    }
                 }
             },
             animation: {
